@@ -24,4 +24,4 @@ oui.tsv: oui.txt
 # Download the raw oui.txt dataset.
 oui.txt:
 	# Trying to retrieve a fresh version of $@...
-	curl $(OUI_DATABASE_URL) > $@
+	curl $(OUI_DATABASE_URL) > $@.tmp && mv $@.tmp $@
