@@ -3,7 +3,7 @@ MAC address OUI lookup script
 
 A simple self-contained script to look up OUIs.
 
-The lookup-oui.sh script comes with a grep-friendly database of
+The oui-lookup.sh script comes with a grep-friendly database of
 prefix/organization entries appended to itself.
 
 Update dataset

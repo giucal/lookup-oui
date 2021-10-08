@@ -3,17 +3,17 @@ PREFIX ?= ~/.local
 # Hope it will stay up...
 OUI_DATABASE_URL ?= http://standards-oui.ieee.org/oui/oui.txt
 
-all: lookup-oui.sh
+all: oui-lookup.sh
 
-install: $(PREFIX)/bin/lookup-oui
+install: $(PREFIX)/bin/oui-lookup
 
-$(PREFIX)/bin/lookup-oui: lookup-oui.sh
+$(PREFIX)/bin/oui-lookup: oui-lookup.sh
 	install $< $@
 
 # Create the actual script with the database appended.
-lookup-oui.sh: lookup-oui.blueprint.sh oui.tsv
+oui-lookup.sh: oui-lookup.blueprint.sh oui.tsv
 	# Creating a self-contained $@ script...
-	cat lookup-oui.blueprint.sh oui.tsv > $@
+	cat oui-lookup.blueprint.sh oui.tsv > $@
 	chmod +x $@
 
 # Create a suitable database from oui.txt.
