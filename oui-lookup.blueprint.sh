@@ -30,7 +30,7 @@ valid_prefix() {
 # Parse arguments.
 
 # Options.
-while getopts 'hPV:' flag; do
+while getopts 'hO:' flag; do
     case $flag in
     (O) regexp="\t$OPTARG" ;;
     (*) usage ;;
