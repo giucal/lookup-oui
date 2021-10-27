@@ -2,6 +2,8 @@
 
 # MAC address OUI lookup.
 #
+# Greps THIS file for a matching MAC address prefix or organization name.
+#
 # Author:  Giuseppe Calabrese
 # Copying: Public Domain
 
@@ -29,10 +31,13 @@ valid_prefix() {
 
 # Parse arguments.
 
+# Reverse search?
+reverse=false
+
 # Options.
-while getopts 'hO:' flag; do
+while getopts 'hO' flag; do
     case $flag in
-    (O) regexp="\t$OPTARG" ;;
+    (O) reverse=true ;;
     (*) usage ;;
     esac
 done
@@ -40,26 +45,31 @@ done
 # Discard parsed flags and their arguments.
 shift $(( OPTIND - 1 ))
 
-if [ -z "$regexp" ]; then
-    # Not searching for an organization; require the <address-prefix> argument.
-    [ $# -ne 1 ] && usage
+# Require an argument.
+[ $# -ne 1 ] && usage
 
-    # Don't permit regexps and whatnot; just plain prefixes.
-    valid_prefix "$1" || error "Not a valid prefix: '$1'."
-
-    # Prepare a MAC address prefix regexp.
-    # - Left-anchor to the beginning of line.
-    # - Use '-'s in place of ':'.
-    # - Use upper-case hex digits.
-    # - Only cover the first 3 bytes of the address; thus,
-    #   trim to the first 8 characters (12-45-78).
-    regexp=$(printf '^%s' "$1" \
-                | tr ':' '-' \
-                | tr '[a-f]' '[A-F]' \
-                | head -c 8)
+if $reverse; then
+    # Search for an organization.
+    # Prefix the search expression with a tab to make sure we only ever match
+    # against the second field. (This file does not use tabs for indentation.)
+    exec grep -iE "\t$1" "$0"
 fi
 
-# Grep THIS file for a match.
+# Searching for a MAC address prefix.
+# Don't permit regexps and whatnot; just plain prefixes.
+valid_prefix "$1" || error "Not a valid prefix: '$1'."
+
+# Prepare a MAC address prefix regexp.
+# - Left-anchor to the beginning of line.
+# - Use '-'s in place of ':'.
+# - Use upper-case hex digits.
+# - Only cover the first 3 bytes of the address; thus,
+#   trim to the first 8 characters (12-45-78).
+regexp=$(printf '^%s' "$1" \
+            | tr ':' '-' \
+            | tr '[a-f]' '[A-F]' \
+            | head -c 8)
+
 exec grep -E "$regexp" "$0"
 
 # An OUI database follows (which is ignored by the interpreter, as the previous
