@@ -8541,7 +8541,6 @@ D4-A4-99	InView Technology Corporation
 08-48-2C	Raycore Taiwan Co., LTD.
 DC-2B-CA	Zera GmbH
 94-98-A2	Shanghai LISTEN TECH.LTD
-7F,A#,NO.3699,Gonghexin	
 E0-ED-C7	Shenzhen Friendcom Technology Development Co., Ltd
 B4-DD-15	ControlThings Oy Ab
 DC-1D-D4	Microstep-MIS spol. s r.o.
@@ -28247,7 +28246,6 @@ EC-6C-9F	Chengdu Volans Technology CO.,LTD
 00-1A-0C	Swe-Dish Satellite Systems AB
 00-19-DC	ENENSYS Technologies
 00-19-D0	Cathexis
-0019D0	16) Cathexis
 00-19-D6	LS Cable and System Ltd.
 00-19-D7	FORTUNETEK CO., LTD
 00-1A-02	SECURE CARE PRODUCTS, INC

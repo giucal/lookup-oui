@@ -19,7 +19,7 @@ oui-lookup.sh: oui-lookup.blueprint.sh oui.tsv
 # Create a suitable database from oui.txt.
 oui.tsv: oui.txt
 	# Creating a tab-separated prefix/organization database...
-	awk '/(hex)/ { $$2 = "\t"; print $0 }' $< | sed 's/ *\t */\t/' > $@
+	awk '/\(hex\)/ { $$2 = "\t"; print $0 }' $< | sed 's/ *\t */\t/' > $@
 
 # Download the raw oui.txt dataset.
 oui.txt:
