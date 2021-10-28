@@ -20,7 +20,7 @@ usage() {
 }
 
 error() {
-    echo "$(basename "$0"): error: $@"
+    echo "$(basename "$0"): error: $*"
     exit 1
 }
 
@@ -67,7 +67,7 @@ valid_prefix "$1" || error "Not a valid prefix: '$1'."
 #   trim to the first 8 characters (12-45-78).
 regexp=$(printf '^%s' "$1" \
             | tr ':' '-' \
-            | tr '[a-f]' '[A-F]' \
+            | tr 'a-f' 'A-F' \
             | head -c 8)
 
 exec grep -E "$regexp" "$0"
