@@ -59,18 +59,17 @@ fi
 # Don't permit regexps and whatnot; just plain prefixes.
 valid_prefix "$1" || error "Not a valid prefix: '$1'."
 
-# Prepare a MAC address prefix regexp.
-# - Left-anchor to the beginning of line.
+# Extract and normalize the MAC address prefix.
 # - Use '-'s in place of ':'.
 # - Use upper-case hex digits.
 # - Only cover the first 3 bytes of the address; thus,
 #   trim to the first 8 characters (12-45-78).
-regexp=$(printf '^%s' "$1" \
+prefix=$(printf '%s' "$1" \
             | tr ':' '-' \
             | tr 'a-f' 'A-F' \
             | head -c 8)
 
-exec grep -E "$regexp" "$0"
+exec grep -E "^$prefix" "$0"
 
 # An OUI database follows (which is ignored by the interpreter, as the previous
 # instruction is exec).
