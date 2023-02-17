@@ -1,7 +1,7 @@
 PREFIX ?= ~/.local
 
 # Hope it will stay up...
-OUI_DATABASE_URL ?= http://standards-oui.ieee.org/oui/oui.txt
+OUI_DATABASE_URL ?= https://standards-oui.ieee.org/oui/oui.txt
 
 all: oui-lookup.sh
 
