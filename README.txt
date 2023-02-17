@@ -12,7 +12,7 @@ Update dataset
 A copy of the datased is included in the repository. A fresh copy
 should be available from the Internet:
 
-    make oui.txt  # downloads a fresh dataset
+    make -B oui.txt  # downloads a fresh dataset
 
 Build
 -----
