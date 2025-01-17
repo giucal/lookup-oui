@@ -7,6 +7,13 @@ all: oui-lookup.sh
 
 install: $(PREFIX)/bin/oui-lookup
 
+clean:
+	# Removing artifacts...
+	rm -f oui-lookup.sh oui.tsv
+clobber: clean
+	# Removing dependencies...
+	rm -f oui.csv dsv.awk
+
 $(PREFIX)/bin/oui-lookup: oui-lookup.sh
 	install $< $@
 
