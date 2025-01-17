@@ -26,7 +26,7 @@ error() {
 
 # Validate a MAC address prefix.
 valid_prefix() {
-    printf '%s' "$1" | grep -qE '^([0-9A-Fa-f]{2}[:-]){0,5}[0-9A-Fa-f]{0,2}$'
+    printf '%s' "$1" | grep -qE '^([0-9A-Fa-f]{2}[:.-]?){0,5}[0-9A-Fa-f]{0,2}$'
 }
 
 # Parse arguments.
@@ -60,14 +60,14 @@ fi
 valid_prefix "$1" || error "Not a valid prefix: '$1'."
 
 # Extract and normalize the MAC address prefix.
-# - Use '-'s in place of ':'.
+# - Strip off '-'s, ':'s and '.'s.
 # - Use upper-case hex digits.
 # - Only cover the first 3 bytes of the address; thus,
-#   trim to the first 8 characters (12-45-78).
+#   trim to the first 6 characters.
 prefix=$(printf '%s' "$1" \
-            | tr ':' '-' \
+            | tr -d ':-.' \
             | tr 'a-f' 'A-F' \
-            | head -c 8)
+            | head -c 6)
 
 exec grep -E "^$prefix" "$0"
 
