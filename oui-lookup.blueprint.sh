@@ -52,7 +52,7 @@ if $reverse; then
     # Search for an organization.
     # Prefix the search expression with a tab to make sure we only ever match
     # against the second field. (This file does not use tabs for indentation.)
-    exec grep -iE "\t$1" "$0"
+    exec grep -iE "\t($1)" "$0"
 fi
 
 # Searching for a MAC address prefix.
