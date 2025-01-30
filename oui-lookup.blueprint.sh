@@ -65,7 +65,7 @@ valid_prefix "$1" || error "Not a valid prefix: '$1'."
 # - Only cover the first 3 bytes of the address; thus,
 #   trim to the first 6 characters.
 prefix=$(printf '%s' "$1" \
-            | tr -d ':-.' \
+            | tr -d ':.-' \
             | tr 'a-f' 'A-F' \
             | head -c 6)
 
